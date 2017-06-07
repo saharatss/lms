@@ -74,7 +74,7 @@ def signin(request):
 				request.session['username'] = user.username
 				print >>sys.stderr, "username_f: %s"%request.session['username']
 				
-				return redirect('add')
+				return redirect('post_new')
 			else:
 				msg="Disabled account"
 		else:
