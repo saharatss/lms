@@ -25,6 +25,32 @@ def home(request):
 def show_add_page(request):
 	return render(request,"add_page.html")
 
+# MARK : Add contain
+
+from django.shortcuts import redirect
+from .forms import PostForm
+
+from django.utils import timezone
+
+from django.contrib.auth import get_user
+
+
+def post_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_detail', pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'post_edit.html', {'form': form})
+
+
+# MARK : Login method
+
 def signin(request):
 	if request.method == 'POST' and 'username' in request.POST:
 		username = request.POST['username']
