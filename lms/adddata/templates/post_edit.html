@@ -5,6 +5,14 @@
     <h3>User : {{request.user}}</h3>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Save</button>
+        <button type="submit" class="save btn btn-default" onclick="Save()" >Save</button>
     </form>
+    <a href="/change_password/">ChangePassword</a> <p></p>
+    <a href="/signout/"> Logout </a>
+    <script type="text/javascript">
+    	function Saves() 
+{
+    alert("SAVE");
+}
+    </script>>
 {% endblock %}
