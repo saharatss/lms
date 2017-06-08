@@ -23,11 +23,3 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
-
-from django import forms
-
-class PostForm(forms.ModelForm):
-
-    class Meta:
-        model = Post
-        fields = ('title', 'text',)
