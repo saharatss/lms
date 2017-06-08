@@ -42,7 +42,8 @@ def post_new(request):
             post.published_date = timezone.now()
             post.save()
             #return redirect('post_detail', pk=post.pk)
-            return HttpResponse("Saved", content_type='text/plain')
+            #return HttpResponse("Saved", content_type='text/plain')
+            return redirect('post_new')
     else:
         form = PostForm()
     return render(request, 'post_edit.html', {'form': form})
@@ -102,9 +103,9 @@ def signout(request):
 		del request.session['username']
 		print "del uname"
 	logout(request)
-	return redirect('wl_auth:signin')
+	return redirect('signin')
 
-@login_required(login_url='wl_auth:signin')
+@login_required(login_url='signin')
 def change_password(request):
     form = PasswordChangeForm(user=request.user)
     print >>sys.stderr, "request.user: %s"%request.user
