@@ -25,6 +25,11 @@ def home(request):
 def show_add_page(request):
 	return render(request,"add_page.html")
 
+# MARK : main page
+
+def class_page(request):
+	return render(request,"page/class_page.html")
+
 # MARK : Add contain
 
 from django.shortcuts import redirect
