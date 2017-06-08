@@ -141,8 +141,10 @@ def change_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            return redirect('main:home')
+            return redirect('signin')
 
     return render(request, 'change_password.html', {
         'form': form,
     })
+
+
