@@ -27,8 +27,30 @@ def show_add_page(request):
 
 # MARK : main page
 
+from .models import Class
+from .models import Subject
+from .models import Lesson
+from .models import Chapter
+
+path_link = [ 	{'name':"HOME",'link':"/class" },
+				{'name':"LOGIN",'link':"/signin" }]
+
+def add_page(request):
+	if request.method == 'POST':
+		test = request.POST.get('test', None)
+		return HttpResponse(test, content_type='text/plain')
+	return render(request,"page/add_page.html")
+
 def class_page(request):
-	return render(request,"page/class_page.html")
+    class_data = Class.objects.all()
+    class_title = []
+    for i in class_data :
+        class_title.append(i.title)
+    return render(request,"page/class_page.html",{
+        'class_title':class_title,
+        'path_link':path_link
+        })
+
 
 # MARK : Add contain
 

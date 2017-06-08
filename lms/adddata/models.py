@@ -24,12 +24,23 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-
-
-
 class Chapter(models.Model):
-    title   = models.CharField(max_length="200")
-    detail  = models.CharField(max_length="100000")
+    title   = models.CharField(max_length=200)
+    detail  = models.CharField(max_length=100000)
+    author  = models.ForeignKey('auth.User')
+    published_date = models.DateTimeField(blank=True, null=True)
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+class Lesson(models.Model):
+    title   = models.CharField(max_length=200)
+    chapter = models.ForeignKey(Chapter)
+
+class Subject(models.Model):
+    title   = models.CharField(max_length=200)
+    lesson  = models.ForeignKey(Lesson)
 
 class Class(models.Model):
-    name    = models.CharField(max_length="200")
+    title   = models.CharField(max_length=200)
+    subject = models.ForeignKey(Subject)

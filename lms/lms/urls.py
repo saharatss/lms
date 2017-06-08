@@ -21,7 +21,7 @@ from adddata import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.home, name='home'),
-    url(r'^add/$', views.show_add_page, name='add'),
+    #url(r'^add/$', views.show_add_page, name='add'),
     url(r'^signin/', views.signin, name='signin'),
     url(r'^signout/', views.signout, name='signout'),
     url(r'^change_password/', views.change_password, name='change_password'),
@@ -31,5 +31,5 @@ urlpatterns = [
     url(r'^post/new/$', views.post_new, name='post_new'),
 
     url(r'^class/$', views.class_page, name='class_page'),
-
+    url(r'^add/$', views.add_page, name='add_page'),
 ]
