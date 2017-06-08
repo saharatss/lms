@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 
+from django.forms import ModelForm
+from adddata.models import User
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User')
@@ -24,12 +26,3 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-
-
-
-class Chapter(models.Model):
-    title   = models.CharField(max_length="200")
-    detail  = models.CharField(max_length="100000")
-
-class Class(models.Model):
-    name    = models.CharField(max_length="200")
