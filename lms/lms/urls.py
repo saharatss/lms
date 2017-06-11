@@ -16,10 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from adddata import views
+from adddata import views ,forms
 
 from django.conf import settings
 from django.conf.urls.static import static
+
 
 urlpatterns = [
     # MARK : Authenticate
@@ -41,7 +42,7 @@ urlpatterns = [
 
     url(r'^test/$', views.simple_upload, name='simple_upload'),                     #simple upload
     url(r'^test2/$', views.model_form_upload, name='model_form_upload'),            #upload connect title to dataBase
-    url(r'^test3/$', views.check, name='check'),                                    #test toggle (sliderCheckBox)
+    url(r'^test3/$', views.check, name='check'),                                   #test toggle (sliderCheckBox)
 
 ]
 

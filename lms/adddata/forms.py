@@ -1,6 +1,7 @@
 from django import forms
 
-from .models import Post
+from .models import Post ,Document
+
 
 class PostForm(forms.ModelForm):
 
@@ -8,10 +9,8 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ('title', 'text',)
 
-from django import forms
-from .models import Document
-
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
         fields = ('description', 'document', )
+

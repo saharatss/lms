@@ -176,6 +176,8 @@ def change_password(request):
         'form': form,
     })
 
+#Mark : Upload Method
+
 from django.shortcuts import render
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
