@@ -15,6 +15,8 @@
   	<script src="{% static 'js/socket.io-1.2.0.js' %}"> </script>
 
   	<style type="text/css">
+  	  	.margin {margin-bottom: 45px;}
+
   		.navbar {
 		      padding-top: 15px;
 		      padding-bottom: 15px;
@@ -23,10 +25,11 @@
 		      margin-bottom: 0;
 		      font-size: 12px;
 		      letter-spacing: 5px;
-		  }
-		  .navbar-nav  li a:hover {
-		      color: #1abc9c !important;
-		  }
+		}
+		.navbar-nav  li a:hover {
+		    color: #1abc9c !important;
+		}
+
   	</style>
 
 </head>
@@ -41,17 +44,27 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">SCiUS Library</a>
+      <a class="navbar-brand" href="#">{{web_name}}</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
       	{% for i in path_link %}
       		<li><a href="{{i.link}}">{{i.name}}</a></li>
       	{% endfor %}
+
+      	<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="">{% if user.is_authenticated %}{{ user.get_username }}{% else %}Login{% endif %}<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="">Logout</a></li>
+        </ul>
+      </li>	
       </ul>
     </div>
   </div>
 </nav>
+
+<div class="jumbotron text-center" style="color:#fff; background-color: #1abc9c;">
+  <h1 style="margin: 100px">Welcome To {{web_name}}</h1>
+</div>
 
 	{% for i in class_title %}
 		<tr class="regular">{{i}}</tr>

@@ -26,7 +26,6 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-#<<<<<<< HEAD
 class Chapter(models.Model):
     title   = models.CharField(max_length=200)
     detail  = models.CharField(max_length=100000)
@@ -47,5 +46,3 @@ class Subject(models.Model):
 class Class(models.Model):
     title   = models.CharField(max_length=200)
     subject = models.ForeignKey(Subject)
-#=======
-#>>>>>>> e22c254225bad43f7a14b075ec4155b57dc3302c

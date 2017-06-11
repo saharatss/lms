@@ -32,8 +32,9 @@ from .models import Subject
 from .models import Lesson
 from .models import Chapter
 
-path_link = [ 	{'name':"HOME",'link':"/class" },
-				{'name':"LOGIN",'link':"/signin" }]
+web_name = "SCiUS TU-SKR Library"
+path_link = [ 	{'name':"HOME",'link':"/class" }]
+				#{'name':"LOGIN",'link':"/signin" }]
 
 def add_page(request):
 	if request.method == 'POST':
@@ -48,7 +49,8 @@ def class_page(request):
         class_title.append(i.title)
     return render(request,"page/class_page.html",{
         'class_title':class_title,
-        'path_link':path_link
+        'path_link':path_link,
+        'web_name':web_name
         })
 
 
