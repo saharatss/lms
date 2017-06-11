@@ -19,15 +19,20 @@ from django.contrib import admin
 from adddata import views
 
 urlpatterns = [
+    # MARK : Authenticate
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.home, name='home'),
-    #url(r'^add/$', views.show_add_page, name='add'),
     url(r'^signin/', views.signin, name='signin'),
     url(r'^signout/', views.signout, name='signout'),
     url(r'^change_password/', views.change_password, name='change_password'),
+
+    url(r'^home/$', views.home, name='home'),
+    #url(r'^add/$', views.show_add_page, name='add'),
     #url(r'^post/(?P<pk>\d+)/$', views.post_detail, name='post_detail'),
     #url(r'^post/(?P<pk>\d+)/edit/$', views.post_edit, name='post_edit'),
     url(r'^post/new/$', views.post_new, name='post_new'),
-    url(r'^class/$', views.class_page, name='class_page'),
+
+    # MARK : New site
+    url(r'^$', views.class_page, name='class_page'),
     url(r'^add/$', views.add_page, name='add_page'),
+    url(r'^add-class/$', views.add_class, name='add_class'),
 ]

@@ -18,16 +18,23 @@
   	  	.margin {margin-bottom: 45px;}
 
   		.navbar {
-		      padding-top: 15px;
-		      padding-bottom: 15px;
-		      border: 0;
-		      border-radius: 0;
-		      margin-bottom: 0;
-		      font-size: 12px;
-		      letter-spacing: 5px;
+		    padding-top: 15px;
+		    padding-bottom: 15px;
+		    border: 0;
+		    border-radius: 0;
+		    margin-bottom: 0;
+		    font-size: 12px;
+		    letter-spacing: 5px;
 		}
 		.navbar-nav  li a:hover {
-		    color: #1abc9c !important;
+		    color: #ccc !important;
+		}
+
+		.class-box {
+			color: #fff;
+			background-color: #ccc;
+			padding-top: 20px;
+		    padding-bottom: 20px;
 		}
 
   	</style>
@@ -35,39 +42,58 @@
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">{{web_name}}</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-      	{% for i in path_link %}
-      		<li><a href="{{i.link}}">{{i.name}}</a></li>
-      	{% endfor %}
+	<!-- Navbar -->
+	<nav class="navbar navbar-default">
+	  <div class="container">
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>                        
+	      </button>
+	      <a class="navbar-brand" href="#">{{web_name}}</a>
+	    </div>
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	      	<ul class="nav navbar-nav navbar-left">
+		      	{% for i in path_link %}
+		      		<li><a href="{{i.link}}">{{i.name}}</a></li>
+		      	{% endfor %}
+	      	</ul>
+	     	 <ul class="nav navbar-nav navbar-right">
+        		{% if user.is_authenticated %}
+		      		<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="" style="text-transform: uppercase;
+		">{{ user.get_username }}<span class="caret"></span></a>
+		        		<ul class="dropdown-menu">
+		        		  <li><a href="/signout/">Logout</a></li>
+		        		</ul>
+		      		</li>	
+		      	{% else %}
+		      		<li><a href="/signin/">LOGIN</a></li>
+		      	{% endif %}
+      		</ul>
+	    </div>
+	  </div>
+	</nav>
+	
+	<div class="jumbotron text-center" style="color:#fff; background-color: #ccc;">
+	  <h1 style="margin: 100px">Welcome To {{web_name}}</h1>
+	</div>
 
-      	<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="">{% if user.is_authenticated %}{{ user.get_username }}{% else %}Login{% endif %}<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="">Logout</a></li>
-        </ul>
-      </li>	
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div class="jumbotron text-center" style="color:#fff; background-color: #1abc9c;">
-  <h1 style="margin: 100px">Welcome To {{web_name}}</h1>
-</div>
-
-	{% for i in class_title %}
-		<tr class="regular">{{i}}</tr>
-	{% endfor %}
+	<div class="container" style="text-align: center;">
+	  <div class="row">
+	  	{% for i in class_title %}
+	  		<div class="col-sm-2 class-box">
+	      		<a style="font-size: 30px; color: #fff; text-decoration:none" href="/add-class">{{i}}</a>
+	    	</div>
+		{% endfor %}
+	    
+	    {% if user.is_authenticated %}
+	    	<div class="col-sm-2 class-box" style="background-color: #999">
+	      		<a style="font-size: 30px; color: #fff; text-decoration:none" href="/add-class">+</a>
+	    	</div>
+		{% endif %}
+	    
+	  </div>
+	</div>
 </body>
 </html>

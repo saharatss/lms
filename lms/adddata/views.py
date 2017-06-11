@@ -32,8 +32,8 @@ from .models import Subject
 from .models import Lesson
 from .models import Chapter
 
-web_name = "SCiUS TU-SKR Library"
-path_link = [ 	{'name':"HOME",'link':"/class" }]
+web_name = "Library"
+path_link = [ 	{'name':"HOME",'link':"" }]
 				#{'name':"LOGIN",'link':"/signin" }]
 
 def add_page(request):
@@ -50,8 +50,17 @@ def class_page(request):
     return render(request,"page/class_page.html",{
         'class_title':class_title,
         'path_link':path_link,
-        'web_name':web_name
+        'web_name':web_name,
+        'class_data':class_data
         })
+
+def add_class(request):
+    if request.method == 'POST':
+        text = request.POST.get('test', None)
+        aClass = Class.objects.create(title=text)
+        aClass.save()
+        print("saved "+ test)
+    return render(request,"page/add_class.html")
 
 
 # MARK : Add contain
@@ -118,7 +127,7 @@ def signin(request):
 				request.session['username'] = user.username
 				print >>sys.stderr, "username_f: %s"%request.session['username']
 				
-				return redirect('post_new')
+				return redirect('class_page')
 			else:
 				msg="Disabled account"
 		else:
