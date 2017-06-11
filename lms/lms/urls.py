@@ -18,6 +18,9 @@ from django.contrib import admin
 
 from adddata import views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     # MARK : Authenticate
     url(r'^admin/', admin.site.urls),
@@ -35,4 +38,12 @@ urlpatterns = [
     url(r'^$', views.class_page, name='class_page'),
     url(r'^add/$', views.add_page, name='add_page'),
     url(r'^add-class/$', views.add_class, name='add_class'),
+
+    url(r'^test/$', views.simple_upload, name='simple_upload'),                     #simple upload
+    url(r'^test2/$', views.model_form_upload, name='model_form_upload'),            #upload connect title to dataBase
+    url(r'^test3/$', views.check, name='check'),                                    #test toggle (sliderCheckBox)
+
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

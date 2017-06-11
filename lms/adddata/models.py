@@ -51,3 +51,8 @@ class Subject(models.Model):
 class Class(models.Model):
     title   = models.CharField(max_length=200)
     subject = models.ForeignKey(Subject)
+
+class Document(models.Model):
+    description = models.CharField(max_length=255, blank=True)
+    document = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)

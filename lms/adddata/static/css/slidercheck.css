@@ -1,0 +1,141 @@
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 6.1px 0;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 17.8px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #bebfbf;
+  border-radius: 10.4px;
+  border: 0.5px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 0.5px solid #000000;
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+  background: #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6.6px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #bebfbf;
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 17.8px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: #bebfbf;
+  border-radius: 10.4px;
+  border: 0.5px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 0.5px solid #000000;
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+  background: #ffffff;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 17.8px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #bebfbf;
+  border: 0.5px solid #010101;
+  border-radius: 20.8px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: #bebfbf;
+  border: 0.5px solid #010101;
+  border-radius: 20.8px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 0.5px solid #000000;
+  height: 30px;
+  width: 30px;
+  border-radius: 50px;
+  background: #ffffff;
+  cursor: pointer;
+  height: 17.8px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #bebfbf;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #bebfbf;
+}
+.switch 
+{
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+.switch input {display:none;}
+.slider 
+{
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+.slider:before 
+{
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+input:checked + .slider 
+{
+  background-color: #3399ff;
+}
+input:focus + .slider 
+{
+  box-shadow: 0 0 1px #3399ff;
+}
+input:checked + .slider:before 
+{
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+  
+}
+/* Rounded sliders */
+.slider.round 
+{
+  border-radius: 34px;
+}
+.slider.round:before 
+{
+  border-radius: 50%;
+}
