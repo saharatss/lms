@@ -31,6 +31,9 @@ from .models import Class
 from .models import Subject
 from .models import Lesson
 from .models import Chapter
+from .models import SDetail
+
+from .models import Post
 
 web_name = "Library"
 path_link = [ 	{'name':"HOME",'link':"" }]
@@ -40,7 +43,10 @@ def add_page(request):
 	if request.method == 'POST':
 		test = request.POST.get('test', None)
 		return HttpResponse(test, content_type='text/plain')
-	return render(request,"page/add_page.html")
+	return render(request,"page/add_page.html",{
+        'path_link':path_link,
+        'web_name':web_name,
+        })
 
 def class_page(request):
     class_data = Class.objects.all()
@@ -57,9 +63,18 @@ def class_page(request):
 def add_class(request):
     if request.method == 'POST':
         text = request.POST.get('test', None)
-        aClass = Class.objects.create(title=text)
+        #aClass = Post(title=text,author=request.user)
+        aDetail = SDetail(textType=0)
+        aDetail.save()
+        aChapter = Chapter(author=request.user,detail=aDetail)
+        aChapter.save()
+        aLesson = Lesson(title="",chapter=aChapter)
+        aLesson.save()
+        aSubject = Subject(title="",lesson=aLesson)
+        aSubject.save()
+        aClass = Class(title=text,subject=aSubject)
         aClass.save()
-        print("saved "+ test)
+        print("saved "+ aClass.title)
     return render(request,"page/add_class.html")
 
 

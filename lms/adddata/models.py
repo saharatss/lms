@@ -26,10 +26,15 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+class SDetail(models.Model):
+    textType= models.IntegerField()
+    text    = models.CharField(max_length=100000)
+
 class Chapter(models.Model):
     title   = models.CharField(max_length=200)
-    detail  = models.CharField(max_length=100000)
+    detail = models.ForeignKey(SDetail)
     author  = models.ForeignKey('auth.User')
+    publish = models.BooleanField()
     published_date = models.DateTimeField(blank=True, null=True)
     def publish(self):
         self.published_date = timezone.now()
