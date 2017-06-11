@@ -10,7 +10,7 @@ from django.utils import timezone
 from django.forms import ModelForm
 from adddata.models import User
 
-class Post(models.Model):
+class DPost(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
     text = models.TextField()
@@ -26,28 +26,20 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-class SDetail(models.Model):
-    textType= models.IntegerField()
-    text    = models.CharField(max_length=100000)
-
-class Chapter(models.Model):
-    title   = models.CharField(max_length=200)
-    detail = models.ForeignKey(SDetail)
-    author  = models.ForeignKey('auth.User')
-    publish = models.BooleanField()
-    published_date = models.DateTimeField(blank=True, null=True)
+class Post(models.Model):
+    Class           = models.CharField(max_length=200)
+    subject         = models.CharField(max_length=200)
+    lesson          = models.CharField(max_length=200)
+    chapter         = models.CharField(max_length=200)
+    detail          = models.TextField()
+    author          = models.ForeignKey('auth.User')
+    created_date    = models.DateTimeField(default=timezone.now)
+    published_date  = models.DateTimeField(blank=True, null=True)
+    publish         = models.BooleanField()
+    view            = models.IntegerField()
     def publish(self):
         self.published_date = timezone.now()
+        self.publish = True
         self.save()
-
-class Lesson(models.Model):
-    title   = models.CharField(max_length=200)
-    chapter = models.ForeignKey(Chapter)
-
-class Subject(models.Model):
-    title   = models.CharField(max_length=200)
-    lesson  = models.ForeignKey(Lesson)
-
-class Class(models.Model):
-    title   = models.CharField(max_length=200)
-    subject = models.ForeignKey(Subject)
+    def __str__(self):
+        return self.chapter
