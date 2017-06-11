@@ -18,6 +18,8 @@ from django.conf import settings
 import sys
 from django.contrib.auth.forms import PasswordChangeForm
 # Create your views here.
+def check(request):
+    return render(request,"slidercheck.html")
 
 def home(request):
 	return render(request,"home.html")
@@ -160,9 +162,10 @@ def signout(request):
 		del request.session['username']
 		print "del uname"
 	logout(request)
-	return redirect('signin')
+	return redirect('class_page')
 
 @login_required(login_url='signin')
+
 def change_password(request):
     form = PasswordChangeForm(user=request.user)
     print >>sys.stderr, "request.user: %s"%request.user
@@ -171,10 +174,38 @@ def change_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            return redirect('signin')
+            return redirect('class_page')
 
     return render(request, 'change_password.html', {
         'form': form,
     })
 
+#Mark : Upload Method
 
+from django.shortcuts import render
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+from .forms import DocumentForm
+
+def simple_upload(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'simple_upload.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'simple_upload.html')
+
+def model_form_upload(request):
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = DocumentForm()
+    return render(request, 'model_form_upload.html', {
+        'form': form
+    })

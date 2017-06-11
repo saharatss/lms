@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="{% static 'css/slidercheck.css' %}" >
+	<title></title>
+</head>
+<body>
+	<label class="switch">
+          <input type="checkbox"  id="toggle" value="OFF" style="color:blue" onclick="toggle(this);">
+           <div class="slider round" >
+           </div>
+</body>
+<script type="text/javascript">
+	function toggle(button)
+{
+  if(document.getElementById("toggle").value=="OFF")
+  {
+   document.getElementById("toggle").value="ON";
+   button = 1
+  }
+  else if(document.getElementById("toggle").value=="ON")
+  {
+   document.getElementById("toggle").value="OFF";
+   button = 0
+}
+   console.log(button);
+}
+</script>
+</html>
