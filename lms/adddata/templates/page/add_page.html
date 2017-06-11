@@ -2,7 +2,6 @@
 
 {% block content %}
 
-	<link rel="stylesheet" href="{% static 'css/slidercheck.css' %}" >
 
 
   	<style type="text/css">
@@ -46,25 +45,21 @@
     		<div class="col-sm-7"></div>
     		<div class="col-sm-1">
     			<!--<label><input type="checkbox" name="Public" value="True" checked="checked">Public</label>-->
-				<label class="switch"><input type="checkbox"  id="toggle" value="OFF" style="color:blue" onclick="toggle(this);">
+				<label class="switch"><input name="publish" type="checkbox"  id="toggle" value="OFF" style="color:blue" onclick="ftoggle(this)">
 			        <div class="slider round" ></div></label>
-				<script type="text/javascript">
-					function toggle(button)
-				{
-				  if(document.getElementById("toggle").value=="OFF")
-				  {
-				   document.getElementById("toggle").value="ON";
-				   button = 1
-				  }
-				  else if(document.getElementById("toggle").value=="ON")
-				  {
-				   document.getElementById("toggle").value="OFF";
-				   button = 0
-				}
-				   console.log(button);
-				}
-				</script>
-    		</div>
+					<script type="text/javascript">
+						function ftoggle(button){
+						  	if(document.getElementById("toggle").value=="OFF"){
+								document.getElementById("toggle").value="ON";
+								button = 1
+							}else if(document.getElementById("toggle").value=="ON"){
+								document.getElementById("toggle").value="OFF";
+								button = 0
+							}
+						   console.log(button);
+						}
+					</script>
+    			</div>
     		<div class="col-sm-2">
     			<button class="btn btn-primary" style="width: 100%" type="submit">Save</button>
     		</div>

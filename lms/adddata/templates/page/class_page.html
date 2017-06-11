@@ -35,13 +35,13 @@
 	  <div class="row">
 	  	{% for i in class_title %}
 	  		<div class="col-sm-2 class-box">
-	      		<a style="font-size: 30px; color: #fff; text-decoration:none" href="/add-class">{{i}}</a>
+	      		<a style="font-size: 30px; color: #fff; text-decoration:none" href="">{{i}}</a>
 	    	</div>
 		{% endfor %}
 	    
 	    {% if user.is_authenticated %}
 	    	<div class="col-sm-2 class-box" style="background-color: #999">
-	      		<a style="font-size: 30px; color: #fff; text-decoration:none" href="/add-class">+</a>
+	      		<a style="font-size: 30px; color: #fff; text-decoration:none" href="/add">+</a>
 	    	</div>
 		{% endif %}
 	    

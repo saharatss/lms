@@ -47,7 +47,8 @@ def add_page(request):
             detail  = form.cleaned_data['detail']
             publish = form.cleaned_data['publish']
             out = Class+" : "+subject+" : "+lesson+" : "+chapter+" : "+detail+" : "+("True" if publish else "False")
-            return HttpResponse(out, content_type='text/plain')
+            #return HttpResponse(out, content_type='text/plain')
+            return redirect('class_page')
     else:
         form = myForm()
     return render(request,"page/add_page.html",{

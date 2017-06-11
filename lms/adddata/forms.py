@@ -14,8 +14,7 @@ class myForm(forms.Form):
     lesson          = forms.CharField(max_length=200)
     chapter         = forms.CharField(max_length=200)
     detail          = forms.CharField()
-    publish         = forms.BooleanField(required=False,initial=False, label='Extra cheeze') 
-        fields = ('title', 'text',)
+    publish         = forms.CharField(required=False) 
 
 class DocumentForm(forms.ModelForm):
     class Meta:
