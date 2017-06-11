@@ -161,6 +161,7 @@ def signout(request):
 	return redirect('class_page')
 
 @login_required(login_url='signin')
+
 def change_password(request):
     form = PasswordChangeForm(user=request.user)
     print >>sys.stderr, "request.user: %s"%request.user
@@ -169,7 +170,7 @@ def change_password(request):
         if form.is_valid():
             form.save()
             update_session_auth_hash(request, form.user)
-            return redirect('signin')
+            return redirect('class_page')
 
     return render(request, 'change_password.html', {
         'form': form,
