@@ -1,0 +1,77 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=0.8">
+  	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" >
+  	<link rel="stylesheet" href="{% static 'css/slidercheck.css' %}" >
+  	<script src="{% static 'js/jquery.min.js' %}">      </script>  
+  	<script src="{% static 'js/bootstrap.min.js' %}">   </script>  
+  	<script src="{% static 'js/raphael-min.js' %}">     </script>  
+  	<script src="{% static 'js/jquery-1.8.2.min.js' %}"></script>    
+  	<script src="{% static 'js/socket.io-1.2.0.js' %}"> </script>
+  	<script src="{% static 'Cloud-Light.otf' %}"> </script>
+
+  	<style type="text/css">
+		@font-face {
+		   font-family: Cloud-Light; 
+		   src: url({% static 'Cloud-Light.otf' %}) format("opentype");
+		} 
+		body {
+			font-family: Cloud-Light;
+			background-color: #f2f2f2;
+			padding: 0 !important;
+   			margin: 0 !important;
+		}
+		.header {
+			background-color: #e6e6e6;
+		}
+		.line1{
+			height: 1px;
+			width: 100%;
+			background-color: #f2f2f2;
+		}
+		.textF1 {
+			width: 100%;
+			height: 40px;
+			border: none;
+			padding-left: 10px;
+			font-size: 18px;
+		}
+		.textF1::-webkit-input-placeholder {
+			color: #ccc
+		}
+		::-webkit-input-placeholder {
+			color: #ccc
+		}
+	</style>
+
+</head>
+<body>
+	<div class="content">
+
+	<div class="col-sm-1"></div>
+	<div class="col-sm-10" style="background-color: #fff">
+		<div class="row header"><div class="col-sm-12"><h3 style="color: #fff" style="text-align: center;">Title</h3></div></div>
+		<div class="row"><div class="col-sm-12"><input class="textF1" type="text" name="" placeholder="Class"></div></div>
+		<div class="line1"></div>
+		<div class="row"><div class="col-sm-12"><input class="textF1" type="text" name="" placeholder="Subject"></div></div>
+		<div class="line1"></div>
+		<div class="row"><div class="col-sm-12"><input class="textF1" type="text" name="" placeholder="Lesson"></div></div>
+		<div class="line1"></div>
+		<div class="row"><div class="col-sm-12"><input class="textF1" type="text" name="" placeholder="Chapter"></div></div>
+		<div class="row header"><div class="col-sm-12"><h3 style="color: #fff">Detail</h3></div></div>
+		<div class="row"><div class="col-sm-12 ta1"><textarea class="form-control" rows="10" id="comment" name="detail" placeholder="Detail" style="border-color: #fff; font-size: 18px; " required></textarea></div></div>
+		<div class="row header" style="padding: 10px">
+			<div class="col-sm-10"></div>
+			<div class="col-sm-2"><button class="btn" style="width: 100%">Save</button></div>
+		</div>
+	</div>
+	<div class="col-sm-1"></div>
+
+</div>
+
+</body>
+</html>

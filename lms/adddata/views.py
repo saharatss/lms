@@ -17,6 +17,9 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 import sys
 from django.contrib.auth.forms import PasswordChangeForm
+
+from flask_socketio import SocketIO, send, emit                                 
+
 # Create your views here.
 def check(request):
     return render(request,"slidercheck.html")
@@ -51,7 +54,7 @@ def add_page(request):
             return redirect('class_page')
     else:
         form = myForm()
-    return render(request,"page/add_page.html",{
+    return render(request,"page/add_detail.html",{
         'path_link':path_link,
         'web_name':web_name,
         'form':form
@@ -84,8 +87,11 @@ def add_class(request):
         #aClass.save()
     return render(request,"page/add_class.html")
 
+def add_detail(request):
+    return render(request,"page/add_detail.html")
 
-# MARK : Add contain
+
+# MARK : Add contain -----------------------------------------------------------------------------------
 
 from django.shortcuts import redirect
 from .forms import PostForm

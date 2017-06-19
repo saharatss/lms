@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^$', views.class_page, name='class_page'),
     url(r'^add/$', views.add_page, name='add_page'),
     url(r'^add-class/$', views.add_class, name='add_class'),
+    url(r'^add-detail/$', views.add_detail, name='add_detail'),
 
     url(r'^test/$', views.simple_upload, name='simple_upload'),                     #simple upload
     url(r'^test2/$', views.model_form_upload, name='model_form_upload'),            #upload connect title to dataBase
