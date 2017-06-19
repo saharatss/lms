@@ -28,55 +28,60 @@ def show_add_page(request):
 	return render(request,"add_page.html")
 
 # MARK : main page
-
-from .models import Class
-from .models import Subject
-from .models import Lesson
-from .models import Chapter
-from .models import SDetail
-
 from .models import Post
+from .forms import myForm
 
 web_name = "Library"
-path_link = [ 	{'name':"HOME",'link':"" }]
+path_link = [ 	{'name':"HOME",'link':"/" }]
 				#{'name':"LOGIN",'link':"/signin" }]
 
 def add_page(request):
-	if request.method == 'POST':
-		test = request.POST.get('test', None)
-		return HttpResponse(test, content_type='text/plain')
-	return render(request,"page/add_page.html",{
+    if request.method == 'POST':
+        form = myForm(request.POST or None)
+        #form = myForm(request.POST)
+        if form.is_valid():
+            Class   = form.cleaned_data['Class']
+            subject = form.cleaned_data['subject']
+            lesson  = form.cleaned_data['lesson']
+            chapter = form.cleaned_data['chapter']
+            detail  = form.cleaned_data['detail']
+            publish = form.cleaned_data['publish']
+            out = Class+" : "+subject+" : "+lesson+" : "+chapter+" : "+detail+" : "+("True" if publish else "False")
+            return HttpResponse(out, content_type='text/plain')
+            #return redirect('class_page')
+    else:
+        form = myForm()
+    return render(request,"page/add_page.html",{
         'path_link':path_link,
         'web_name':web_name,
+        'form':form
         })
 
 def class_page(request):
-    class_data = Class.objects.all()
-    class_title = []
-    for i in class_data :
-        class_title.append(i.title)
+    #class_data = Class.objects.all()
+    #for i in class_data :
+    #    class_title.append(i.title)
     return render(request,"page/class_page.html",{
-        'class_title':class_title,
+        #'class_title':class_title,
         'path_link':path_link,
-        'web_name':web_name,
-        'class_data':class_data
+        'web_name':web_name
+        #'class_data':class_data
         })
 
 def add_class(request):
-    if request.method == 'POST':
-        text = request.POST.get('test', None)
+    #if request.method == 'POST':
+        
         #aClass = Post(title=text,author=request.user)
-        aDetail = SDetail(textType=0)
-        aDetail.save()
-        aChapter = Chapter(author=request.user,detail=aDetail)
-        aChapter.save()
-        aLesson = Lesson(title="",chapter=aChapter)
-        aLesson.save()
-        aSubject = Subject(title="",lesson=aLesson)
-        aSubject.save()
-        aClass = Class(title=text,subject=aSubject)
-        aClass.save()
-        print("saved "+ aClass.title)
+        #aDetail = SDetail(textType=0)
+        #aDetail.save()
+        #aChapter = Chapter(author=request.user,detail=aDetail)
+        #aChapter.save()
+        #aLesson = Lesson(title="",chapter=aChapter)
+        #aLesson.save()
+        #aSubject = Subject(title="test2NaJa",lesson=aLesson)
+        #aSubject.save()
+        #aClass = Class.objects.get(title="test") #Class(title=text,subject=aSubject)
+        #aClass.save()
     return render(request,"page/add_class.html")
 
 

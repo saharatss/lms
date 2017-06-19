@@ -2,6 +2,8 @@
 
 {% block content %}
 
+
+
   	<style type="text/css">
   		.row{
   			margin: 10px;
@@ -13,82 +15,56 @@
 	<input type="text" name="test">
 	<button type="submit">Submit</button>
 	-->
+	<form method="POST">{% csrf_token %}
 
-	<div class="content text-center" style="color:#fff; background-color: #ccc; padding: 20px">
-	  <h2 style="margin: 0px">Add</h2>
-	</div>
-
-	<div class="content text-center" style=" background-color: #f2f2f2; padding-top: 10px; padding-bottom: 10px">
-		<div class="row">
-			<div class="col-sm-12">
-				<label class="col-sm-1 control-label align-middle" for="inputSuccess">Class</label>
-				<div class="col-sm-11">
-					<input type="text" class="form-control" id="inputSuccess" name="class">
-				</div>
+	<div class="content" style="color:#fff; background-color: #ccc; padding: 20px">
+	  	<h2 style="margin: 0px; text-align: center;">Add</h2>
+	  	<div class="row">
+	  		<div class="col-sm-3">
+				<input type="text" class="form-control" id="inputSuccess" name="Class" placeholder="Class" required >
 			</div>
-	    </div>
-	    <div class="row">
-			<div class="col-sm-12">
-				<label class="col-sm-1 control-label align-middle" for="inputSuccess">Subject</label>
-				<div class="col-sm-11">
-					<input type="text" class="form-control" id="inputSuccess" name="class">
-				</div>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" id="inputSuccess" name="subject" placeholder="Subject" required>
 			</div>
-	    </div>
-	    <div class="row">
-			<div class="col-sm-12">
-				<label class="col-sm-1 control-label align-middle" for="inputSuccess">Lesson</label>
-				<div class="col-sm-11">
-					<input type="text" class="form-control" id="inputSuccess" name="class">
-				</div>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" id="inputSuccess" name="lesson" placeholder="Lesson" required>
 			</div>
-	    </div>
-	    <div class="row">
-			<div class="col-sm-12">
-				<label class="col-sm-1 control-label align-middle" for="inputSuccess">Chapter</label>
-				<div class="col-sm-11">
-					<input type="text" class="form-control" id="inputSuccess" name="class">
-				</div>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" id="inputSuccess" name="chapter" placeholder="Chapter" required>
 			</div>
-	    </div>
-	</div>
-
-    <style type="text/css">
-    	textarea {
-
-    	}
-    	.text0 {
-
-    	}
-    </style>
-
-    <div class="content text-center" style=" background-color: #ccc; padding-top: 10px; padding-bottom: 10px">
+	  	</div>
     	<div class="row">
-    		<textarea class="form-control" rows="10" id="comment"></textarea>
+    		<div class="col-sm-12">
+    			<textarea class="form-control" rows="10" id="comment" name="detail" placeholder="Detail" required></textarea>
+    		</div>
     	</div>
-    </div>
-
-    <div class="content text-center" style=" background-color: #ccc; padding-top: 10px; padding-bottom: 10px">
     	<div class="row">
     		<div class="col-sm-2">
     			<button class="btn btn-default" style="width: 100%">Back</button>
     		</div>
-    		<div class="col-sm-6"></div>
-    		<div class="col-sm-2">
-    			<button class="btn btn-default" style="width: 100%" type="submit">Save Draw</button>
-    		</div>
+    		<div class="col-sm-7"></div>
+    		<div class="col-sm-1">
+    			<!--<label><input type="checkbox" name="Public" value="True" checked="checked">Public</label>-->
+				<label class="switch"><input name="publish" type="checkbox"  id="toggle" value="OFF" style="color:blue" onclick="ftoggle(this)">
+			        <div class="slider round" ></div></label>
+					<script type="text/javascript">
+						function ftoggle(button){
+						  	if(document.getElementById("toggle").value=="OFF"){
+								document.getElementById("toggle").value="ON";
+								button = 1
+							}else if(document.getElementById("toggle").value=="ON"){
+								document.getElementById("toggle").value="OFF";
+								button = 0
+							}
+						   console.log(button);
+						}
+					</script>
+    			</div>
     		<div class="col-sm-2">
     			<button class="btn btn-primary" style="width: 100%" type="submit">Save</button>
     		</div>
     	</div>
     </div>
-
-
-
-
-
-    
-
-  </div>
+    </form>
 
 {% endblock %}
