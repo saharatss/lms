@@ -14,6 +14,8 @@ class myForm(forms.Form):
     lesson          = forms.CharField(max_length=200)
     chapter         = forms.CharField(max_length=200)
     detail          = forms.CharField()
+    publish         = forms.CharField(required=False)
+    #fields = ('Class','subject','lesson','chapter','detail','publish') 
     publish         = forms.CharField(required=False) 
 
 class DocumentForm(forms.ModelForm):
