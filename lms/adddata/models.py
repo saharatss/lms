@@ -41,8 +41,6 @@ class Post(models.Model):
         self.published_date = timezone.now()
         self.publish = True
         self.save()
-    def __str__(self):
-        return self.chapter
 
 
 class Document(models.Model):

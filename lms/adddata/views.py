@@ -48,14 +48,25 @@ def add_page(request):
             lesson  = form.cleaned_data['lesson']
             chapter = form.cleaned_data['chapter']
             detail  = form.cleaned_data['detail']
-            publish = form.cleaned_data['publish']
-            out = Class+" : "+subject+" : "+lesson+" : "+chapter+" : "+detail+" : "+("True" if publish else "False")
-
+            #publish = form.cleaned_data['publish']
+            out = Class+" : "+subject+" : "+lesson+" : "+chapter+" : "+detail#+" : "+("True" if publish else "False")
+            post = Post()
+            post.Class    = Class
+            post.subject  = subject
+            post.lesson   = lesson
+            post.chapter  = chapter
+            post.detail   = detail
+            post.author   = request.user
+            post.created_date = timezone.now()
+            post.publish  = True
+            post.view     = 0
+            post.save()
+            print(post.detail)
             return HttpResponse(out, content_type='text/plain')
             #return redirect('class_page')
 
             #return HttpResponse(out, content_type='text/plain')
-            return redirect('class_page')
+            #return redirect('class_page')
 
     else:
         form = myForm()
@@ -66,11 +77,17 @@ def add_page(request):
         })
 
 def class_page(request):
-    #class_data = Class.objects.all()
-    #for i in class_data :
-    #    class_title.append(i.title)
+    data = Post.objects.all()
+    class_title = []
+    for i in data :
+        haved = False
+        for j in class_title:
+            if i.Class == j:
+                haved = True
+        if haved == False:
+            class_title.append(i.Class)
     return render(request,"page/class_page.html",{
-        #'class_title':class_title,
+        'class_title':class_title,
         'path_link':path_link,
         'web_name':web_name
         #'class_data':class_data
