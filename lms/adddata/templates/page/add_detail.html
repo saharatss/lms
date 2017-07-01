@@ -12,15 +12,14 @@
   	<script src="{% static 'js/raphael-min.js' %}">     </script>  
   	<script src="{% static 'js/jquery-1.8.2.min.js' %}"></script>    
   	<script src="{% static 'js/socket.io-1.2.0.js' %}"> </script>
-  	<script src="{% static 'Cloud-Light.otf' %}"> </script>
 
   	<style type="text/css">
 		@font-face {
-		   font-family: Cloud-Light; 
+		   font-family: "Cloud-Light"; 
 		   src: url({% static 'Cloud-Light.otf' %}) format("opentype");
 		} 
 		body {
-			font-family: Cloud-Light;
+			font-family: "Cloud-Light";
 			background-color: #f2f2f2;
 			padding: 0 !important;
    			margin: 0 !important;
@@ -54,20 +53,48 @@
 
 	<div class="col-sm-1"></div>
 	<div class="col-sm-10" style="background-color: #fff">
+		<form method="POST" id="myform" onsubmit="return prepareSubmit()">{% csrf_token %}
 		<div class="row header"><div class="col-sm-12"><h3 style="color: #fff" style="text-align: center;">Title</h3></div></div>
-		<div class="row"><div class="col-sm-12"><input class="textF1" type="text" name="" placeholder="Class"></div></div>
+		<div class="row"><div class="col-sm-12"><input class="textF1" type="text" name="Class" id="Class" placeholder="Class" style="margin-top: 8px;" required></div></div>
 		<div class="line1"></div>
-		<div class="row"><div class="col-sm-12"><input class="textF1" type="text" name="" placeholder="Subject"></div></div>
+		<div class="row"><div class="col-sm-12"><input class="textF1" type="text" name="subject" id="subject" placeholder="Subject" required></div></div>
 		<div class="line1"></div>
-		<div class="row"><div class="col-sm-12"><input class="textF1" type="text" name="" placeholder="Lesson"></div></div>
+		<div class="row"><div class="col-sm-12"><input class="textF1" type="text" name="lesson" id="lesson" placeholder="Lesson"></div required></div>
 		<div class="line1"></div>
-		<div class="row"><div class="col-sm-12"><input class="textF1" type="text" name="" placeholder="Chapter"></div></div>
+		<div class="row"><div class="col-sm-12"><input class="textF1" type="text" name="chapter" id="chapter" placeholder="Chapter" style="margin-bottom: 8px;" required></div></div>
 		<div class="row header"><div class="col-sm-12"><h3 style="color: #fff">Detail</h3></div></div>
-		<div class="row"><div class="col-sm-12 ta1"><textarea class="form-control" rows="10" id="comment" name="detail" placeholder="Detail" style="border-color: #fff; font-size: 18px; " required></textarea></div></div>
-		<div class="row header" style="padding: 10px">
-			<div class="col-sm-10"></div>
-			<div class="col-sm-2"><button class="btn" style="width: 100%">Save</button></div>
+		<div class="row">
+			<div class="col-sm-12 ta1">
+				<textarea rows="10" name="detail" id="detail" placeholder="Detail" style="border-color: #fff; font-size: 18px; resize: vertical; width: 100%;padding-left: 10px; margin-top: 6px;" required></textarea>
+			</div>
 		</div>
+		<div class="row header" style="padding: 10px">
+			<div class="col-sm-2"><button class="btn" style="width: 100%" onclick="location.href='/';">Cancel</button></div>
+			<div class="col-sm-8"></div>
+			<div class="col-sm-2"><button class="btn" style="width: 100%" type="submit">Save</button></div>
+		</div>
+		</form>
+
+		<script type="text/javascript">
+			// JSON
+			// stringify(var) <- send
+			// parse(var) <- receive
+
+			function prepareSubmit(){
+				//alert("Submit button clicked!");
+				var f1 = document.getElementById("Class");
+				var f2 = document.getElementById("subject");
+				var f3 = document.getElementById("lesson");
+				var f4 = document.getElementById("chapter");
+				var d0 = document.getElementById("detail");
+				//if(f1.value!="" && f2.value!="" && f3.value!="" && f4.value!=""){
+					var data = [{'C0':d0.value}];
+    				document.getElementById("detail").value = JSON.stringify(data);
+				//}
+				return true;
+			}
+		</script>
+
 	</div>
 	<div class="col-sm-1"></div>
 

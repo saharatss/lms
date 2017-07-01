@@ -1,14 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-
 from django.shortcuts import render
-
 from django.http import HttpResponse
 #from .models import Weather
-
 from django.http import JsonResponse
 import json
-
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
@@ -17,8 +13,11 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 import sys
 from django.contrib.auth.forms import PasswordChangeForm
-
 from flask_socketio import SocketIO, send, emit                                 
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 
 # Create your views here.
 def check(request):
@@ -48,14 +47,25 @@ def add_page(request):
             lesson  = form.cleaned_data['lesson']
             chapter = form.cleaned_data['chapter']
             detail  = form.cleaned_data['detail']
-            publish = form.cleaned_data['publish']
-            out = Class+" : "+subject+" : "+lesson+" : "+chapter+" : "+detail+" : "+("True" if publish else "False")
-
+            #publish = form.cleaned_data['publish']
+            out = Class+" : "+subject+" : "+lesson+" : "+chapter+" : "+detail#+" : "+("True" if publish else "False")
+            post = Post()
+            post.Class    = Class
+            post.subject  = subject
+            post.lesson   = lesson
+            post.chapter  = chapter
+            post.detail   = detail
+            post.author   = request.user
+            post.created_date = timezone.now()
+            post.publish  = True
+            post.view     = 0
+            post.save()
+            print(post.detail)
             return HttpResponse(out, content_type='text/plain')
             #return redirect('class_page')
 
             #return HttpResponse(out, content_type='text/plain')
-            return redirect('class_page')
+            #return redirect('class_page')
 
     else:
         form = myForm()
@@ -66,11 +76,17 @@ def add_page(request):
         })
 
 def class_page(request):
-    #class_data = Class.objects.all()
-    #for i in class_data :
-    #    class_title.append(i.title)
+    data = Post.objects.all()
+    class_title = []
+    for i in data :
+        haved = False
+        for j in class_title:
+            if i.Class == j:
+                haved = True
+        if haved == False:
+            class_title.append(i.Class)
     return render(request,"page/class_page.html",{
-        #'class_title':class_title,
+        'class_title':class_title,
         'path_link':path_link,
         'web_name':web_name
         #'class_data':class_data
@@ -137,6 +153,36 @@ def post_edit(request, pk):
 
 # MARK : Login method
 
+def signup(request):
+    if request.method == 'POST' and 'username' in request.POST:
+        form = UserCreationForm(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
+        password2 = request.POST['Check_password']
+        email = request.POST['Email']
+        fullname = request.POST['Fullname']
+        lastname = request.POST['Lastname']
+        if password==password2:
+            user = authenticate(username=username, password=password)
+            print password
+            print username
+            print user
+            password1 = password
+            #return redirect('signin')
+            user = User.objects.create_user(
+                username=username,
+                password=password1,
+                email=email,
+                first_name=fullname,
+                last_name=lastname,
+                )
+        else:
+            print "UnmatchPassword"
+            return redirect('signup')
+            
+    else:
+        form = UserCreationForm()
+    return render(request, 'signup2.html', {'form': form})
 def signin(request):
 	if request.method == 'POST' and 'username' in request.POST:
 		username = request.POST['username']
@@ -221,3 +267,8 @@ def model_form_upload(request):
     return render(request, 'model_form_upload.html', {
         'form': form
     })
+
+
+
+
+

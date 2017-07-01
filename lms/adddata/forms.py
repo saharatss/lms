@@ -16,7 +16,7 @@ class myForm(forms.Form):
     detail          = forms.CharField()
     publish         = forms.CharField(required=False)
     #fields = ('Class','subject','lesson','chapter','detail','publish') 
-    publish         = forms.CharField(required=False) 
+    #publish         = forms.CharField(required=False) 
 
 class DocumentForm(forms.ModelForm):
     class Meta:
