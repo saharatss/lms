@@ -176,10 +176,9 @@ def signup(request):
                 first_name=fullname,
                 last_name=lastname,
                 )
+            return redirect('class_page')  
         else:
-            print "UnmatchPassword"
-            return redirect('signup')
-            
+            print "UnmatchPassword"    
     else:
         form = UserCreationForm()
     return render(request, 'signup2.html', {'form': form})
