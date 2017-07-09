@@ -164,19 +164,22 @@ def signup(request):
         lastname = request.POST['Lastname']
         if password==password2:
             user = authenticate(username=username, password=password)
-            print password
-            print username
-            print user
-            password1 = password
-            #return redirect('signin')
-            user = User.objects.create_user(
-                username=username,
-                password=password1,
-                email=email,
-                first_name=fullname,
-                last_name=lastname,
-                )
-            return redirect('class_page')  
+            if user is not None:
+                return redirect('singup')
+            else:
+                print password
+                print username
+                print user
+                password1 = password
+                #return redirect('signin')
+                user = User.objects.create_user(
+                    username=username,
+                    password=password1,
+                    email=email,
+                    first_name=fullname,
+                    last_name=lastname,
+                    )
+                return redirect('class_page')  
         else:
             print "UnmatchPassword"    
     else:
