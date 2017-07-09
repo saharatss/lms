@@ -64,13 +64,14 @@
 		      		<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="" style="text-transform: uppercase;
 		">{{ user.get_username }}<span class="caret"></span></a>
 		        		<ul class="dropdown-menu">
-		        		  	<li><a href="{% url 'adddata:admin' %}">Admin</a></li>
+		        		  	<li><a href="/admin/">Admin</a></li>
 		        		  	<li><a href="/change_password/">ChangePassword</a></li>
 		        		  	<li><a href="/signout/">Logout</a></li>
-		        		  	<li><a href="/signup">SignUp</a></li>
+		        		  	
 		        		</ul>
 		      		</li>	
 		      	{% else %}
+		      		<li><a href="/signup/">SIGN UP</a></li>
 		      		<li><a href="/signin/">LOGIN</a></li>
 		      	{% endif %}
       		</ul>
